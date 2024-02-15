@@ -12,6 +12,8 @@ function App() {
     </div>
   )
 
+
+  // 1. "push the state down" METHOD.
   function HeaderWithButton() {
     const[title, setTitle] = useState('name1')
 
