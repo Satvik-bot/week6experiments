@@ -1,3 +1,19 @@
-#btn {
-    margin-bottom: 10px;
+@font-face {
+    font-family: "CDRegular";
+    src: url('./Assets/ClashDisplay-Regular.woff2');
+}
+@font-face {
+    font-family: "CDMedium";
+    src: url('./Assets/ClashDisplay-Medium.woff2');
+}
+@font-face {
+    font-family: "CDLight";
+    src: url('./Assets/ClashDisplay-Light.woff2');
+}
+
+*{
+    font-family: 'CDRegular';
+    font-size: 16px;
+    /* background-color:  blanchedalmond; */
+    margin: 5px;
 }

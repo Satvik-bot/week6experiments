@@ -1,30 +1,38 @@
-import React, { useState } from "react"
-import './index.css'
+import { useEffect, useState } from "react"
 
-function App() {
-  const[title, setTitle] = useState('name1')
+//real wrapper
+export default function App() {
+  const [todos, setTodos] = useState([])
 
-  function changeName(){
-    setTitle(Math.random())
-  }
+  useEffect(() => {
+    setInterval(() => {
+      fetch("https://sum-server.100xdevs.com/todos")
+      .then(async (res) => {
+        const json = await res.json()
+        setTodos(json.todos)
+      })
+    }, 5000);
+  }, [])
 
-  return (
-    <div>
-      <button id='btn' onClick={changeName}>Change Name</button>
-      <Header title={title}></Header>
-      <Header title='name2'></Header>
-      <Header title='name2'></Header>
-      <Header title='name3'></Header>
-      <Header title='name4'></Header>
-    </div>
-  )
+  return <div>
+    <CardWrapper>
+      {todos.map(todo => <Todo key={todo.id} title={todo.title} description={todo.description}/>)}
+    </CardWrapper>
+  </div>
 }
 
-const Header = React.memo(function Header({title}) {
-  return <div>
-    {title}
-  </div>
-})
+function Todo({title, description}) {
+ return <CardWrapper>
+    <h1>
+      {title}
+    </h1>
+    <h4>
+      {description}
+    </h4>
+  </CardWrapper>
+}
 
-
-export default App
+// Accept a react comoponent as an input
+function CardWrapper({children}) {
+  return <div style={{border:"2px solid black"}}>{children}</div>
+}
